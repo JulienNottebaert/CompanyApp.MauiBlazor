@@ -7,12 +7,6 @@ a, .btn-link {
     color: #006bb7;
 }
 
-.btn-primary {
-    color: #fff;
-    background-color: #1b6ec2;
-    border-color: #1861ac;
-}
-
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
     box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
@@ -85,4 +79,97 @@ h1:focus {
     .flex-column, .navbar-brand {
         padding-left: env(safe-area-inset-left);
     }
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: white;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.quiz-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+}
+
+.quiz-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    width: 300px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+    .quiz-card h4 {
+        margin-top: 0;
+    }
+
+    .quiz-card ul {
+        list-style-type: none;
+        padding-left: 0;
+    }
+
+    .quiz-card li {
+        margin-bottom: 10px;
+    }
+
+.correct {
+    color: green;
+    font-weight: bold;
+}
+
+.incorrect {
+    color: red;
+    font-weight: bold;
+}
+
+.logo-icon {
+    margin-right: 10px; /* Ajoute de l'espacement entre le logo et le titre */
+}
+
+.btn-white {
+    background-color: white;
+    color: black;
+}
+
+.btn-green {
+    background-color : green;
+    color: white;
+}
+
+.btn-green:hover {
+    background-color : darkgreen;
+    color: white;
 }

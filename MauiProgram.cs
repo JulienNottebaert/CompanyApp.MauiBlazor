@@ -15,10 +15,11 @@ namespace CompanyApp.MauiBlazor
                 });
 
             builder.Services.AddMauiBlazorWebView();
+            builder.Services.AddSingleton<QuizService>();
 
 #if DEBUG
-    		builder.Services.AddBlazorWebViewDeveloperTools();
-    		builder.Logging.AddDebug();
+            builder.Services.AddBlazorWebViewDeveloperTools();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();

@@ -1,0 +1,69 @@
+﻿@page "/saisie-quiz"
+@using CompanyApp.MauiBlazor.Models
+@inject NavigationManager Navigation
+@inject QuizService QuizService
+
+<h3>Saisie du Quiz</h3>
+
+<EditForm Model="@quiz" OnValidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label>Nom:</label>
+        <InputText @bind-Value="quiz.Nom" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Type:</label>
+        <InputText @bind-Value="quiz.Type" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Difficulté:</label>
+        <InputText @bind-Value="quiz.Difficulte" class="form-control" />
+    </div>
+
+    <h4>Questions</h4>
+    @foreach (var question in quiz.Questions)
+    {
+            <div class="form-group">
+                <label>Question:</label>
+                <InputText @bind-Value="question.Texte" class="form-control" />
+                <h5>Réponses</h5>
+            @foreach (var reponse in question.Reponses)
+            {
+                        <div class="form-group">
+                            <label>Réponse:</label>
+                            <InputText @bind-Value="reponse.Valeur" class="form-control" />
+                            <label>Est Correcte:</label>
+                            <InputCheckbox @bind-Value="reponse.EstCorrecte" />
+                        </div>
+            }
+                        <button type="button" class="btn btn-white" @onclick="() => AddReponse(question)">Ajouter Réponse</button>
+            </div> 
+    }
+    <button type="button" class="btn" @onclick="AddQuestion">Ajouter Question</button>
+
+    <button type="submit" class="btn btn-green">Soumettre</button>
+</EditForm> 
+
+@code {
+    private Quiz quiz = new Quiz { Questions = new List<Question>() };
+
+    private void AddQuestion()
+    {
+        quiz.Questions.Add(new Question { Reponses = new List<Reponse>() });
+    }
+
+    private void AddReponse(Question question)
+    {
+        question.Reponses.Add(new Reponse());
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        var quizzes = await QuizService.LoadQuizzesAsync();
+        quizzes.Add(quiz);
+        await QuizService.SaveQuizzesAsync(quizzes);
+        Navigation.NavigateTo("/resume-quiz");
+    }
+}

@@ -1,0 +1,47 @@
+﻿@page "/resume-quiz"
+@using CompanyApp.MauiBlazor.Models
+@inject QuizService QuizService
+
+<h3>Résumé des Quiz</h3>
+
+<div class="quiz-container">
+    @foreach (var quiz in quizzes)
+    {
+        <div class="quiz-card">
+            <h4>@quiz.Nom</h4>
+            <p><strong>Type:</strong> @quiz.Type</p>
+            <p><strong>Difficulté:</strong> @quiz.Difficulte</p>
+            <h5>Questions</h5>
+            <ul>
+                @foreach (var question in quiz.Questions)
+                {
+                    <li>
+                        <p>@question.Texte</p>
+                        <ul>
+                            @foreach (var reponse in question.Reponses)
+                            {
+                                <li>@reponse.Valeur - @if (reponse.EstCorrecte)
+                                    {
+                                        <span class="correct">Correct</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="incorrect">Incorrect</span>
+                                    }</li>
+                            }
+                        </ul>
+                    </li>
+                }
+            </ul>
+        </div>
+    }
+</div>
+
+@code {
+    private List<Quiz> quizzes = new List<Quiz>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        quizzes = await QuizService.LoadQuizzesAsync();
+    }
+}
